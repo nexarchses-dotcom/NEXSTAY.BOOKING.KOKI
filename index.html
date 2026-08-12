@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Book Your Stay | NEXSTAY</title>
+<meta name="theme-color" content="#0A1F44">
+<meta name="description" content="Book direct with NEXSTAY — Buru-un & Tibanga, Iligan City vacation rentals.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><polygon points=%2250,3 93,25 93,75 50,97 7,75 7,25%22 fill=%22%230A1F44%22/><polygon points=%2250,15 82,32 82,68 50,85 18,68 18,32%22 fill=%22%2300C2D1%22/></svg>">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --navy:#0A1F44; --navy2:#0B1F3A; --cyan:#00B8D9; --cyan2:#00C2D1;
+  --mango:#FFD60A; --mango2:#FFB703; --bg:#F4F7FA; --card:#FFFFFF;
+  --ink:#0F1B2D; --muted:#63728A; --line:#E3E9F1; --danger:#E5484D; --ok:#1AAB6B;
+  font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,.brandfont{font-family:'Chakra Petch',Inter,sans-serif;}
+button{font-family:inherit;cursor:pointer;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,#062042 100%);color:#fff;padding:40px 20px 90px;text-align:center;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(0,184,217,.25),transparent 55%);}
+.hero .wrap{position:relative;z-index:1;max-width:720px;margin:0 auto;}
+.hexlogo{width:56px;height:56px;margin:0 auto 12px;display:block;}
+.hero h1{font-size:30px;margin:0 0 6px;}
+.hero p{color:#B9C7DE;font-size:14px;margin:0 auto;max-width:480px;}
+.trustRow{display:flex;justify-content:center;gap:18px;margin-top:18px;flex-wrap:wrap;}
+.trustChip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);padding:7px 14px;border-radius:30px;font-size:11.5px;color:#D8E3F5;}
+.trustChip i{color:var(--cyan2);margin-right:5px;}
+
+/* SHELL */
+.wrapMain{max-width:720px;margin:-56px auto 60px;padding:0 16px;}
+.steps{display:flex;justify-content:space-between;margin-bottom:18px;gap:6px;}
+.stepDot{flex:1;text-align:center;font-size:11px;color:var(--muted);position:relative;}
+.stepDot .n{width:26px;height:26px;border-radius:50%;background:#E3E9F1;color:var(--muted);display:flex;align-items:center;justify-content:center;margin:0 auto 4px;font-weight:700;font-size:12px;}
+.stepDot.active .n{background:var(--cyan);color:#012;}
+.stepDot.done .n{background:var(--ok);color:#fff;}
+.card{background:var(--card);border-radius:16px;box-shadow:0 10px 34px rgba(10,31,68,.1);padding:22px;border:1px solid var(--line);margin-bottom:16px;}
+.card h3{margin:0 0 4px;font-size:16px;}
+.card .sub{font-size:12px;color:var(--muted);margin-bottom:14px;}
+.grid{display:grid;gap:12px;}
+.g2{grid-template-columns:1fr 1fr;} .g3{grid-template-columns:repeat(3,1fr);}
+@media(max-width:520px){.g3{grid-template-columns:1fr;}}
+label{font-size:12px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px;}
+input,select,textarea{padding:11px 12px;border-radius:10px;border:1px solid var(--line);font-size:14px;width:100%;background:#fff;color:var(--ink);}
+.formRow{margin-bottom:12px;}
+.btn{border:none;border-radius:11px;padding:13px 18px;font-weight:700;font-size:14.5px;width:100%;}
+.btnPrimary{background:linear-gradient(90deg,var(--cyan),var(--cyan2));color:#00222b;}
+.btnGhost{background:#fff;border:1px solid var(--line);color:var(--navy);}
+.unitCard{border:2px solid var(--line);border-radius:14px;padding:14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;margin-bottom:10px;transition:.15s;}
+.unitCard:hover{border-color:var(--cyan);}
+.unitCard.sel{border-color:var(--cyan);background:#EAF9FB;}
+.unitCard .nm{font-weight:700;font-size:14.5px;}
+.unitCard .meta{font-size:11.5px;color:var(--muted);margin-top:3px;}
+.unitCard .rate{font-weight:700;color:var(--navy);font-size:15px;white-space:nowrap;}
+.miniCal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px;}
+.miniCal .d{text-align:center;font-size:10.5px;padding:6px 2px;border-radius:6px;background:#F1F5F9;color:var(--muted);}
+.miniCal .d.booked{background:#FDE8E8;color:var(--danger);text-decoration:line-through;}
+.miniCal .d.avail{background:#E4F7EE;color:var(--ok);}
+.summaryRow{display:flex;justify-content:space-between;font-size:13.5px;padding:6px 0;border-bottom:1px dashed var(--line);}
+.summaryRow.total{font-weight:800;font-size:16px;border-bottom:none;padding-top:10px;}
+.badge{display:inline-block;background:#FFF6DA;color:#8a6a00;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;}
+.hp{position:absolute;left:-9999px;top:-9999px;}
+.confirmBox{text-align:center;padding:30px 10px;}
+.confirmBox i{font-size:52px;color:var(--ok);margin-bottom:12px;}
+.confirmBox h2{margin:0 0 8px;}
+.refCode{font-family:monospace;font-size:20px;font-weight:700;background:#F1F5F9;padding:8px 16px;border-radius:10px;display:inline-block;margin:10px 0;letter-spacing:1px;}
+.err{color:var(--danger);font-size:12.5px;margin-top:4px;}
+.foot{text-align:center;font-size:11.5px;color:var(--muted);margin-top:24px;}
+.spin{width:34px;height:34px;border:3px solid #E3E9F1;border-top-color:var(--cyan);border-radius:50%;animation:sp 0.8s linear infinite;margin:20px auto;}
+@keyframes sp{to{transform:rotate(360deg);}}
+.demoBanner{background:#FFF6DA;color:#8a6a00;font-size:12px;padding:9px 14px;border-radius:10px;margin-bottom:14px;display:flex;gap:8px;align-items:center;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <svg class="hexlogo" viewBox="0 0 100 100"><polygon points="50,3 93,25 93,75 50,97 7,75 7,25" fill="#00C2D1"/><polygon points="50,15 82,32 82,68 50,85 18,68 18,32" fill="#0A1F44"/></svg>
+    <h1>Book Your Stay</h1>
+    <p>Direct booking — no commission, best rate guaranteed. Buru-un & Tibanga, Iligan City.</p>
+    <div class="trustRow">
+      <div class="trustChip"><i class="fa-solid fa-shield-halved"></i>Secure request</div>
+      <div class="trustChip"><i class="fa-solid fa-bolt"></i>Instant reply via SMS/Email</div>
+      <div class="trustChip"><i class="fa-solid fa-hand-holding-dollar"></i>No card needed to inquire</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapMain">
+  <div id="demoBannerWrap"></div>
+  <div class="steps" id="stepsBar"></div>
+  <div id="stepArea"></div>
+  <div class="foot">NEXSTAY by NEXARCH Systems Engineering · Buru-un, Iligan City · Powered by CYRABELL</div>
+</div>
+
+<script>
+/* ==========================================================================
+   NEXSTAY PUBLIC BOOKING PAGE
+   Guest-facing, no login. Reads live availability from the same Google Sheet
+   used by the NEXSTAY admin app (via the shared Apps Script Web App), and
+   submits booking requests to it. The Apps Script Web App URL is stored
+   client-side ONLY in AES-256-GCM encrypted form (see "URL PROTECTION" below)
+   so it is never visible as plaintext in the page source or in view-source/
+   basic scraping. Falls back to a local demo dataset if no backend responds,
+   so the page is fully explorable before you deploy your own script.
+   ========================================================================== */
+
+/* ---------------- URL PROTECTION (AES-256-GCM via WebCrypto) ----------------
+   IMPORTANT — HONEST LIMITATION: this is a fully static, client-side page
+   (GitHub Pages, no server). "Encrypting" the URL here means it cannot be
+   found by grepping the HTML/JS source or by simple bot scraping — it is
+   NOT secret from a determined visitor who opens DevTools, because the
+   browser must decrypt it locally to make the request. For true secrecy,
+   proxy the request through a server or Cloudflare Worker that holds the
+   real URL and forwards it. This layer stops casual scraping/spam bots and
+   keeps the raw endpoint out of your public GitHub repo history/diffs.
+   Use the "Generate Encrypted URL" helper in the README to produce your own
+   ciphertext + iv + salt for your real Apps Script deployment. --------------- */
+const URLPROTECT = {
+  // Replace these three values using the encryption helper in README.md
+  ct:   'PASTE_CIPHERTEXT_BASE64_HERE',
+  iv:   'PASTE_IV_BASE64_HERE',
+  salt: 'PASTE_SALT_BASE64_HERE',
+};
+// Passphrase split across parts so it isn't a single greppable string.
+const _p1 = 'Nex', _p2 = 'Stay', _p3 = 'Buru-un', _p4 = '2026#Book';
+const PASSPHRASE = _p1 + _p2 + _p3 + _p4;
+
+async function deriveKey(passphrase, saltB64){
+  const enc = new TextEncoder();
+  const salt = Uint8Array.from(atob(saltB64), c=>c.charCodeAt(0));
+  const keyMat = await crypto.subtle.importKey('raw', enc.encode(passphrase), {name:'PBKDF2'}, false, ['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2', salt, iterations:120000, hash:'SHA-256'}, keyMat, {name:'AES-GCM', length:256}, false, ['encrypt','decrypt']);
+}
+async function decryptURL(){
+  try{
+    if(URLPROTECT.ct.startsWith('PASTE_')) return null; // not configured yet -> demo mode
+    const key = await deriveKey(PASSPHRASE, URLPROTECT.salt);
+    const iv = Uint8Array.from(atob(URLPROTECT.iv), c=>c.charCodeAt(0));
+    const ct = Uint8Array.from(atob(URLPROTECT.ct), c=>c.charCodeAt(0));
+    const pt = await crypto.subtle.decrypt({name:'AES-GCM', iv}, key, ct);
+    return new TextDecoder().decode(pt);
+  }catch(e){ console.warn('URL decrypt failed, using demo mode', e); return null; }
+}
+
+/* ---------------- STATE ---------------- */
+let APPS_SCRIPT_URL = null;
+let DEMO_MODE = true;
+let UNITS = []; let PROPS = []; let BOOKED_RANGES = {}; // unitId -> [{checkIn,checkOut}]
+let SELECTED = { propId:null, unitId:null, checkIn:null, checkOut:null, guests:1 };
+let STEP = 1;
+
+const $ = id => document.getElementById(id);
+const peso = n => '₱' + (Number(n)||0).toLocaleString('en-PH',{minimumFractionDigits:2,maximumFractionDigits:2});
+const todayISO = () => new Date().toISOString().slice(0,10);
+function addDays(dstr,n){const d=new Date(dstr);d.setDate(d.getDate()+n);return d.toISOString().slice(0,10);}
+function daysBetween(a,b){return Math.round((new Date(b)-new Date(a))/86400000);}
+function fmtDate(d){return new Date(d).toLocaleDateString('en-PH',{month:'short',day:'numeric',year:'numeric'});}
+function uidRef(){return 'NX-'+Date.now().toString(36).toUpperCase().slice(-6);}
+
+/* ---------------- DEMO FALLBACK DATA (mirrors admin app's seed) ---------------- */
+function demoData(){
+  PROPS = [
+    {id:'PR-001', name:'NEXSTAY Buru-un Beachfront', address:'Buru-un, Iligan City, Lanao del Norte'},
+    {id:'PR-002', name:'NEXSTAY Tibanga Residences', address:'Tibanga, Iligan City'},
+  ];
+  UNITS = [
+    {id:'U-101',propId:'PR-001',name:'Beachfront Studio A',type:'Studio',maxGuests:2,baseRate:2200},
+    {id:'U-102',propId:'PR-001',name:'Beachfront 1BR B',type:'1BR',maxGuests:3,baseRate:3200},
+    {id:'U-103',propId:'PR-001',name:'Beachfront 2BR Villa',type:'2BR Villa',maxGuests:5,baseRate:5800},
+    {id:'U-201',propId:'PR-002',name:'Tibanga Condo 12A',type:'1BR',maxGuests:3,baseRate:2600},
+    {id:'U-202',propId:'PR-002',name:'Tibanga Condo 8B',type:'Studio',maxGuests:2,baseRate:1900},
+  ];
+  BOOKED_RANGES = {
+    'U-101':[{checkIn:addDays(todayISO(),2),checkOut:addDays(todayISO(),5)}],
+    'U-102':[{checkIn:addDays(todayISO(),0),checkOut:addDays(todayISO(),1)}],
+    'U-103':[],
+    'U-201':[{checkIn:addDays(todayISO(),6),checkOut:addDays(todayISO(),9)}],
+    'U-202':[],
+  };
+}
+
+/* ---------------- LOAD (live Sheets via Apps Script, else demo) ---------------- */
+async function loadAvailability(){
+  APPS_SCRIPT_URL = await decryptURL();
+  if(!APPS_SCRIPT_URL){ demoData(); DEMO_MODE=true; finishLoad(); return; }
+  try{
+    const res = await fetch(APPS_SCRIPT_URL + '?action=availability', {method:'GET'});
+    const data = await res.json();
+    if(data.ok){
+      PROPS = data.properties; UNITS = data.units; BOOKED_RANGES = data.bookedRanges;
+      DEMO_MODE = false;
+    } else { demoData(); DEMO_MODE = true; }
+  }catch(e){ demoData(); DEMO_MODE = true; }
+  finishLoad();
+}
+function finishLoad(){
+  $('demoBannerWrap').innerHTML = DEMO_MODE ? `<div class="demoBanner"><i class="fa-solid fa-flask"></i> Demo mode — showing sample availability. Connect your Apps Script URL (see README) to go live with real Google Sheets data.</div>` : '';
+  renderSteps(); renderStep();
+}
+
+/* ---------------- STEP INDICATOR ---------------- */
+function renderSteps(){
+  const labels=['Choose Unit','Pick Dates','Your Details','Confirm'];
+  $('stepsBar').innerHTML = labels.map((l,i)=>{
+    const idx=i+1; const cls= idx<STEP?'done':idx===STEP?'active':'';
+    return `<div class="stepDot ${cls}"><div class="n">${idx<STEP?'<i class=\"fa-solid fa-check\"></i>':idx}</div>${l}</div>`;
+  }).join('');
+}
+
+/* ---------------- STEP 1: CHOOSE UNIT ---------------- */
+function renderStep(){
+  if(STEP===1) return renderStepUnit();
+  if(STEP===2) return renderStepDates();
+  if(STEP===3) return renderStepDetails();
+  if(STEP===4) return renderStepConfirm();
+}
+function renderStepUnit(){
+  $('stepArea').innerHTML = PROPS.map(p=>`
+    <div class="card">
+      <h3>${p.name}</h3>
+      <div class="sub"><i class="fa-solid fa-location-dot"></i> ${p.address}</div>
+      ${UNITS.filter(u=>u.propId===p.id).map(u=>`
+        <div class="unitCard ${SELECTED.unitId===u.id?'sel':''}" onclick="selectUnit('${u.id}')">
+          <div><div class="nm">${u.name}</div><div class="meta">${u.type} · up to ${u.maxGuests} guests</div></div>
+          <div class="rate">${peso(u.baseRate)}<div style="font-size:10px;color:var(--muted);font-weight:400;">/night</div></div>
+        </div>`).join('')}
+    </div>`).join('');
+}
+function selectUnit(id){
+  SELECTED.unitId=id; SELECTED.propId=UNITS.find(u=>u.id===id).propId;
+  STEP=2; renderSteps(); renderStep();
+}
+
+/* ---------------- STEP 2: DATES ---------------- */
+function renderStepDates(){
+  const unit=UNITS.find(u=>u.id===SELECTED.unitId);
+  const ranges = BOOKED_RANGES[unit.id]||[];
+  const next21=[...Array(21)].map((_,i)=>addDays(todayISO(),i));
+  const isBooked = d => ranges.some(r=> d>=r.checkIn && d<r.checkOut);
+  $('stepArea').innerHTML = `
+  <div class="card">
+    <h3>${unit.name}</h3>
+    <div class="sub">Select your check-in and check-out dates</div>
+    <div class="grid g2">
+      <div class="formRow"><label>Check-in</label><input type="date" id="dCI" min="${todayISO()}" value="${SELECTED.checkIn||todayISO()}"></div>
+      <div class="formRow"><label>Check-out</label><input type="date" id="dCO" min="${addDays(todayISO(),1)}" value="${SELECTED.checkOut||addDays(todayISO(),1)}"></div>
+    </div>
+    <div class="formRow"><label>Guests</label><input type="number" id="dGuests" min="1" max="${unit.maxGuests}" value="${SELECTED.guests}"></div>
+    <div id="dateErr" class="err"></div>
+    <div class="sub" style="margin-top:10px;">Next 21 days — red = unavailable</div>
+    <div class="miniCal">${next21.map(d=>`<div class="d ${isBooked(d)?'booked':'avail'}" title="${fmtDate(d)}">${new Date(d).getDate()}</div>`).join('')}</div>
+  </div>
+  <div class="card" id="rateSummary"></div>
+  <button class="btn btnGhost" style="margin-bottom:10px;" onclick="STEP=1;renderSteps();renderStep();"><i class="fa-solid fa-arrow-left"></i> Back</button>
+  <button class="btn btnPrimary" onclick="confirmDates()">Continue <i class="fa-solid fa-arrow-right"></i></button>`;
+  updateRateSummary();
+  $('dCI').addEventListener('change',updateRateSummary);
+  $('dCO').addEventListener('change',updateRateSummary);
+}
+function updateRateSummary(){
+  const unit=UNITS.find(u=>u.id===SELECTED.unitId);
+  const ci=$('dCI').value, co=$('dCO').value;
+  const nights=daysBetween(ci,co);
+  const wrap=$('rateSummary');
+  if(nights<=0){ wrap.innerHTML=`<div class="err">Check-out must be after check-in.</div>`; return; }
+  const sub = unit.baseRate*nights;
+  wrap.innerHTML = `<div class="summaryRow"><span>${peso(unit.baseRate)} × ${nights} night${nights>1?'s':''}</span><span>${peso(sub)}</span></div>
+  <div class="summaryRow total"><span>Estimated total</span><span>${peso(sub)}</span></div>
+  <div class="sub" style="margin-top:4px;">Final total confirmed by the host upon approval. VAT/discounts applied at check-in if applicable.</div>`;
+}
+function confirmDates(){
+  const unit=UNITS.find(u=>u.id===SELECTED.unitId);
+  const ci=$('dCI').value, co=$('dCO').value, guests=+$('dGuests').value||1;
+  const nights=daysBetween(ci,co);
+  if(nights<=0){ $('dateErr').textContent='Check-out must be after check-in.'; return; }
+  if(guests>unit.maxGuests){ $('dateErr').textContent='This unit sleeps up to '+unit.maxGuests+' guests.'; return; }
+  const ranges=BOOKED_RANGES[unit.id]||[];
+  const overlap = ranges.some(r=> !(co<=r.checkIn || ci>=r.checkOut));
+  if(overlap){ $('dateErr').textContent='Selected dates overlap an existing booking. Please pick different dates.'; return; }
+  SELECTED.checkIn=ci; SELECTED.checkOut=co; SELECTED.guests=guests; SELECTED.nights=nights; SELECTED.total=unit.baseRate*nights;
+  STEP=3; renderSteps(); renderStep();
+}
+
+/* ---------------- STEP 3: GUEST DETAILS ---------------- */
+function renderStepDetails(){
+  $('stepArea').innerHTML = `
+  <div class="card">
+    <h3>Your Details</h3>
+    <div class="sub">We'll confirm by SMS, Email, or WhatsApp — whichever you prefer.</div>
+    <div class="formRow"><label>Full Name *</label><input id="gName" placeholder="Juan Dela Cruz"></div>
+    <div class="grid g2">
+      <div class="formRow"><label>Mobile Number *</label><input id="gPhone" placeholder="+63 9XX XXX XXXX"></div>
+      <div class="formRow"><label>Email</label><input id="gEmail" placeholder="you@email.com"></div>
+    </div>
+    <div class="formRow"><label>Preferred contact method</label>
+      <select id="gPref"><option>SMS</option><option>Email</option><option>WhatsApp</option><option>Viber</option><option>Facebook Messenger</option></select>
+    </div>
+    <div class="formRow"><label>Special requests (optional)</label><textarea id="gNotes" rows="2" placeholder="Early check-in, extra pillows, etc."></textarea></div>
+    <div class="formRow"><label>Quick check: what is ${SELECTED.captchaA=Math.ceil(Math.random()*6)} + ${SELECTED.captchaB=Math.ceil(Math.random()*6)}? *</label><input id="gCaptcha" placeholder="Answer"></div>
+    <input class="hp" id="gHoneypot" tabindex="-1" autocomplete="off">
+    <div id="detailErr" class="err"></div>
+  </div>
+  <button class="btn btnGhost" style="margin-bottom:10px;" onclick="STEP=2;renderSteps();renderStep();"><i class="fa-solid fa-arrow-left"></i> Back</button>
+  <button class="btn btnPrimary" onclick="submitBooking()">Review & Submit <i class="fa-solid fa-arrow-right"></i></button>`;
+}
+
+/* ---------------- STEP 4: SUBMIT + CONFIRM ---------------- */
+async function submitBooking(){
+  const name=$('gName').value.trim(), phone=$('gPhone').value.trim(), email=$('gEmail').value.trim();
+  const captcha=+$('gCaptcha').value; const honeypot=$('gHoneypot').value;
+  if(honeypot){ return; } // silently drop bot submissions
+  if(!name || !phone){ $('detailErr').textContent='Name and mobile number are required.'; return; }
+  if(captcha !== (SELECTED.captchaA+SELECTED.captchaB)){ $('detailErr').textContent='Please answer the check question correctly.'; return; }
+
+  const unit=UNITS.find(u=>u.id===SELECTED.unitId);
+  const ref = uidRef();
+  const payload = {
+    ref, unitId:unit.id, unitName:unit.name, propId:unit.propId,
+    checkIn:SELECTED.checkIn, checkOut:SELECTED.checkOut, nights:SELECTED.nights, guests:SELECTED.guests, total:SELECTED.total,
+    guestName:name, guestPhone:phone, guestEmail:email,
+    contactPref:$('gPref').value, notes:$('gNotes').value,
+    channel:'Direct', status:'Inquiry', submittedAt:new Date().toISOString(),
+  };
+
+  STEP=4; renderSteps();
+  $('stepArea').innerHTML = `<div class="card"><div class="spin"></div><div class="sub" style="text-align:center;">Sending your request...</div></div>`;
+
+  if(DEMO_MODE || !APPS_SCRIPT_URL){
+    setTimeout(()=>showConfirmation(ref,payload),700); // simulate for demo mode
+    return;
+  }
+  try{
+    const body = new URLSearchParams({action:'public_booking', payload: JSON.stringify(payload)});
+    const res = await fetch(APPS_SCRIPT_URL, {method:'POST', body});
+    const data = await res.json();
+    if(data.ok) showConfirmation(ref,payload);
+    else showSubmitError(data.error||'Please try again or contact us directly.');
+  }catch(e){ showSubmitError('Network error — please try again or contact us directly.'); }
+}
+function showSubmitError(msg){
+  $('stepArea').innerHTML = `<div class="card confirmBox"><i class="fa-solid fa-circle-exclamation" style="color:var(--danger);"></i>
+  <h2>Couldn't Send Request</h2><p class="sub">${msg}</p>
+  <button class="btn btnPrimary" onclick="STEP=3;renderSteps();renderStep();">Try Again</button></div>`;
+}
+function showConfirmation(ref,payload){
+  $('stepArea').innerHTML = `<div class="card confirmBox">
+    <i class="fa-solid fa-circle-check"></i>
+    <h2>Request Sent!</h2>
+    <p class="sub">Your booking reference is</p>
+    <div class="refCode">${ref}</div>
+    <p class="sub">${payload.unitName} · ${fmtDate(payload.checkIn)} – ${fmtDate(payload.checkOut)} · ${payload.nights} night(s)<br>Estimated total: ${peso(payload.total)}</p>
+    <span class="badge"><i class="fa-solid fa-clock"></i> Awaiting host confirmation</span>
+    <p class="sub" style="margin-top:14px;">We'll reach out via <b>${payload.contactPref}</b> shortly to confirm availability and payment details.</p>
+    <button class="btn btnGhost" style="margin-top:10px;" onclick="location.reload()">Make Another Request</button>
+  </div>`;
+}
+
+loadAvailability();
+</script>
+</body>
+</html>
